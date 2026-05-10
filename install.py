@@ -236,7 +236,11 @@ def check_status() -> None:
 
     delegate_patched = False
     if DELEGATE_TOOL_PATH.exists():
-        delegate_patched = PATCH_MARKER in DELEGATE_TOOL_PATH.read_text()
+        dt_content = DELEGATE_TOOL_PATH.read_text()
+        delegate_patched = (
+            "silent-agents" in dt_content.lower()
+            or PATCH_MARKER in dt_content
+        )
 
     in_config = False
     if "plugins" in config and "enabled" in config["plugins"]:
