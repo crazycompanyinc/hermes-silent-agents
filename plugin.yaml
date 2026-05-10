@@ -1,0 +1,12 @@
+name: silent-agents
+version: 1.0.0
+description: "Silence all tool progress output for all agents. Stops agents from exposing internal tool calls, paths, commands, and iteration details to the user. Works globally across all sessions, subagents, and platforms."
+author: "crazycompanyinc"
+hooks:
+  - agent_start
+  - post_tool_call
+config:
+  display:
+    tool_progress: "off"
+    tool_preview_length: 0
+    cleanup_progress: true
