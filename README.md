@@ -32,7 +32,7 @@ Works for **all agents**: main agent, subagents, delegated agents, cron jobs.
 
 ## Install
 
-### One-liner
+### One-liner (recommended)
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/crazycompanyinc/hermes-silent-agents/main/install.py | python3
@@ -74,8 +74,10 @@ display:
     discord:
       tool_progress: "off"    # Was "all"
       tool_preview_length: 0
-    # ... all platforms
+    # ... all 20+ platforms
 ```
+
+Also adds `silent-agents` to `plugins.enabled` list.
 
 ### `~/.hermes/.env`
 
@@ -117,7 +119,7 @@ The `display.tool_progress` setting controls tool progress visibility:
 
 ### 3. Per-Platform Overrides
 
-Different platforms have different defaults:
+Different platforms have different defaults. The plugin sets ALL platforms to `off`:
 
 | Platform | Default | After Plugin |
 |----------|---------|--------------|
@@ -126,6 +128,10 @@ Different platforms have different defaults:
 | Slack | `"off"` | `"off"` |
 | Signal | `"off"` | `"off"` |
 | TUI | `"all"` | `"off"` (via env var) |
+
+### 4. Subagent Inheritance
+
+Subagents inherit the parent's `display` config automatically. The plugin's `agent_start` hook fires for every agent (parent and child), ensuring silent mode is always active.
 
 ## Result
 
